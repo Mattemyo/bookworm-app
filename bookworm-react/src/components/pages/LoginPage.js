@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import LoginForm from '../forms/LoginForm';
+import { login } from '../../actions/auth';
 
-export default class LoginPage extends Component {
-  submit = (data: {}) => {
-    console.log(data);
-  };
-  render(): ?React$Element<any> {
+
+class LoginPage extends Component<{ history: {} }, State> {
+  submit = (data: {}) =>
+    this.props.login(data).then(() => this.props.history.push('/'));
+
+  render(): Element<any> {
     return (
       <div>
         <h1>Login Page</h1>
@@ -15,3 +18,5 @@ export default class LoginPage extends Component {
     );
   }
 }
+
+export default connect(null, { login })(LoginPage);
