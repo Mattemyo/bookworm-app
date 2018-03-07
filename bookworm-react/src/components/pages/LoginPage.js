@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import LoginForm from '../forms/LoginForm';
 import { login } from '../../actions/auth';
 
-
-class LoginPage extends Component<{ history: {} }, State> {
+class LoginPage extends Component<Props, State> {
   submit = (data: {}) =>
     this.props.login(data).then(() => this.props.history.push('/'));
 

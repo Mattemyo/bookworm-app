@@ -4,7 +4,7 @@ export default {
   user: {
     login: (credentials: {}): {} =>
       axios
-        .post('/api/auth', { credentials })
+        .post('http://localhost:8080/api/auth', { credentials })
         .then((res: {}): {} => res.data.user)
   }
 };

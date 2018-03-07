@@ -21,6 +21,8 @@
   },
   "rules": {
     "no-undef": "off",
+    "no-unused-vars": "off",
+    "no-alert": [2],
     "react/prop-types": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "flowtype/boolean-style": [2, "boolean"],
