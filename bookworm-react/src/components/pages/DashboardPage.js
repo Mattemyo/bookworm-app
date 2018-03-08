@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 
 import ConfirmEmailMessage from '../messages/ConfirmEmailMessage';
 
-const DashBoardPage = ({
+const DashboardPage = ({
   isConfirmed
 }: {
   isConfirmed: boolean
@@ -16,4 +16,4 @@ function mapStateToProps(state: {}): {} {
   };
 }
 
-export default withRouer(connect(mapStateToProps)(DashboardPage));
+export default withRouter(connect(mapStateToProps)(DashboardPage));

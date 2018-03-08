@@ -7,8 +7,7 @@ export const userLoggedIn = (user: {}): {} => ({
 });
 
 export const userLoggedOut = (): {} => ({
-  type: USER_LOGGED_OUT,
-  user
+  type: USER_LOGGED_OUT
 });
 
 export const login = (credentials: {}): any => (dispatch: {}): any =>

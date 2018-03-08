@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { withRouter } from "react-router";
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/auth';
 
@@ -16,7 +16,11 @@ const HomePage = ({
     {isAuthenticated ? (
       <button onClick={(): any => logout()}>Logout</button>
     ) : (
-      <Link to="/login">Login</Link>
+      <div>
+        <Link to="/login">Login</Link>
+        or
+        <Link to="/signup">Sign Up</Link>
+      </div>
     )}
   </div>
 );

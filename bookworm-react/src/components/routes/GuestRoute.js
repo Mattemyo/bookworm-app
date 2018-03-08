@@ -18,9 +18,9 @@ const UserRoute = ({
   />
 );
 
-function mapStateToProps(user: { token: string }): {} {
+function mapStateToProps(state: {}): {} {
   return {
-    isAuthenticated: Boolean(token)
+    isAuthenticated: Boolean(state.user.token)
   };
 }
 

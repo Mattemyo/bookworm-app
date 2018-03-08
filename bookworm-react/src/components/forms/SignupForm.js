@@ -3,7 +3,7 @@ import { Form, Button, Message } from 'semantic-ui-react';
 import Validator from 'validator';
 import InlineError from '../messages/InlineError';
 
-export default class LoginForm extends Component<Props> {
+export default class SignupForm extends Component<Props> {
   state = {
     data: {
       email: '',
