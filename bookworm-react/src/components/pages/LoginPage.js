@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import LoginForm from '../forms/LoginForm';
 import { login } from '../../actions/auth';
 
 class LoginPage extends Component<Props, State> {
-  submit = (data: {}) =>
-    this.props.login(data).then(() => this.props.history.push('/'));
+  submit = (data: {}) => {
+    this.props
+      .login(data)
+      .then((): void => this.props.history.push('/dashboard'));
+  };
 
   render(): Element<any> {
     return (
@@ -18,4 +22,4 @@ class LoginPage extends Component<Props, State> {
   }
 }
 
-export default connect(null, { login })(LoginPage);
+export default withRouter(connect(null, { login })(LoginPage));

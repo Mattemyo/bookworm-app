@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from "react-router";
 import { connect } from 'react-redux';
 import * as actions from '../../actions/auth';
 
@@ -25,4 +26,6 @@ function mapStateToProps(state: {}): {} {
     isAuthenticated: Boolean(state.user.token)
   };
 }
-export default connect(mapStateToProps, { logout: actions.logout })(HomePage);
+export default withRouter(
+  connect(mapStateToProps, { logout: actions.logout })(HomePage)
+);
