@@ -7,19 +7,23 @@ import Promise from 'bluebird';
 
 import auth from './routes/auth';
 import users from './routes/users';
+import books from './routes/books';
 
 dotenv.config();
 const app = express();
 app.use(bodyParser.json());
 mongoose.Promise = Promise;
 
-mongoose.connect(process.env.MONGODB_URL, { useMongoClient: true });
+mongoose.connect(process.env.MONGODB_URL);
 
-app.use('/api/auth', auth);
-app.use('/api/users', users);
+const { use, get, listen } = app;
 
-app.get('/*', (req: {}, { sendFile }: { sendFile: {} }) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+use('/api/auth', auth);
+use('/api/users', users);
+use('/api/books', books);
+
+get('/*', (req: {}, { sendFile }: { sendFile: {} }) => {
+  sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(8080, console.log('Running on localhost:8080'));
+listen(8080, console.log('Running on localhost:8080'));

@@ -5,7 +5,9 @@ import { sendResetPasswordEmail } from '../mailer';
 
 const router = express.Router();
 
-router.post(
+const { post } = router;
+
+post(
   '/',
   (
     {
@@ -26,7 +28,7 @@ router.post(
   }
 );
 
-router.post(
+post(
   '/confirmation',
   (
     { body: { token } }: { token: string },
@@ -46,7 +48,7 @@ router.post(
   }
 );
 
-router.post(
+post(
   '/reset_password_request',
   (
     { body: email }: { email: string },
@@ -63,7 +65,7 @@ router.post(
   }
 );
 
-router.post(
+post(
   '/validate_token',
   ({ body: { token } }: { token: string }, { status, json }: { json: {} }) => {
     jwt.verify(token, process.env.JWT_SECRET, (err: {}) => {
@@ -76,7 +78,7 @@ router.post(
   }
 );
 
-router.post('/reset_password', (req: {}, res: {}) => {
+post('/reset_password', (req: {}, res: {}) => {
   const { password, token } = req.body.data;
   jwt.verify(
     token,

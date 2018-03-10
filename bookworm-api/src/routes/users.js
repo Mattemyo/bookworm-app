@@ -5,7 +5,9 @@ import { sendConfirmationEmail } from '../mailer';
 
 const router = express.Router();
 
-router.post(
+const { post } = router;
+
+post(
   '/',
   (
     {
