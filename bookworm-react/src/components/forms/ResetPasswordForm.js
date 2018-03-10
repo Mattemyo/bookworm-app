@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Form, Button, Message } from 'semantic-ui-react';
-import Validator from 'validator';
 import InlineError from '../messages/InlineError';
 
 export default class ResetPasswordForm extends Component<Props> {
@@ -8,7 +7,7 @@ export default class ResetPasswordForm extends Component<Props> {
     data: {
       token: this.props.token,
       password: '',
-      passwordConfirmation
+      passwordConfirmation: ''
     },
     loading: false,
     errors: {
@@ -80,7 +79,7 @@ export default class ResetPasswordForm extends Component<Props> {
           />
           {errors.password && <InlineError text={errors.password} />}
         </Form.Field>
-          <Form.Field error={Boolean(errors.passwordConfirmation)}>
+        <Form.Field error={Boolean(errors.passwordConfirmation)}>
           <label htmlFor="passwordConfirmation">Confirm new password</label>
           <input
             type="password"
@@ -90,6 +89,7 @@ export default class ResetPasswordForm extends Component<Props> {
             value={data.passwordConfirmation}
             onChange={this.onChange}
           />
+        </Form.Field>
         <Button primary>Login</Button>
       </Form>
     );

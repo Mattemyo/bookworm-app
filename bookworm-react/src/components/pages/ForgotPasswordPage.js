@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Message } from 'semantic-ui-react';
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
 import ForgotPasswordForm from '../forms/ForgotPasswordForm';
 import { resetPasswordRequest } from '../../actions/auth';
 

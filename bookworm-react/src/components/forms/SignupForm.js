@@ -78,8 +78,9 @@ export default class SignupForm extends Component<Props> {
           />
           {errors.password && <InlineError text={errors.password} />}
         </Form.Field>
-        <Button primary>Login</Button>
+        <Button primary>Sign Up</Button>
       </Form>
     );
+    
   }
 }

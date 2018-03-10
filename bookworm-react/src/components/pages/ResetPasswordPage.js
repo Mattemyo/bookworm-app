@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Message } from 'semantic-ui-react';
 import ResetPasswordForm from '../forms/ResetPasswordForm';
-import { validateToken, ResetPassword } from '../../actions/auth';
+import { validateToken, resetPassword } from '../../actions/auth';
 
 class ResetPasswordPage extends Component<State, Props> {
   state = {
@@ -14,15 +14,15 @@ class ResetPasswordPage extends Component<State, Props> {
     this.props
       .validateToken(this.props.match.params.token)
       .then(() => {
-        this.setState((loading: false), (success: true));
+        this.setState({ loading: false, success: true });
       })
       .catch(() => {
-        this.setState((loading: false), (success: false));
+        this.setState({ loading: false, success: false });
       });
   };
 
-  submit = (data) => {
-    this.ResetPassword(data).then(() => {
+  submit = (data: {}) => {
+    this.props.ResetPassword(data).then(() => {
       this.props.history.push('/login');
     });
   };
@@ -41,4 +41,6 @@ class ResetPasswordPage extends Component<State, Props> {
   }
 }
 
-export default withRouter(connect(null, { validateToken })(ResetPasswordPage));
+export default withRouter(
+  connect(null, { validateToken, resetPassword })(ResetPasswordPage)
+);

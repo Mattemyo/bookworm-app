@@ -14,7 +14,7 @@ class SignupPage extends Component<Props, State> {
   render(): Element<any> {
     return (
       <div>
-        <h1>Signin Page</h1>
+        <h1>Signup Page</h1>
 
         <SignupForm submit={this.submit} />
       </div>
