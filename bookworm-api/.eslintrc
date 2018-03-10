@@ -11,7 +11,8 @@
     "node": true
   },
   "rules": {
-    "no-underscore-dangle": [ 1, {"allow": ["_id"] }],
+    "flowtype/no-types-missing-file-annotation": 0,
+    "no-underscore-dangle": [1, { "allow": ["_id"] }],
     "no-undef": "off",
     "no-unused-vars": "off",
     "no-alert": [2],
@@ -20,7 +21,6 @@
     "flowtype/delimiter-dangle": [2, "never"],
     "flowtype/generic-spacing": [2, "never"],
     "flowtype/no-primitive-constructor-types": 2,
-    "flowtype/no-types-missing-file-annotation": 2,
     "flowtype/no-weak-types": 2,
     "flowtype/object-type-delimiter": [2, "comma"],
     "flowtype/require-parameter-type": 2,

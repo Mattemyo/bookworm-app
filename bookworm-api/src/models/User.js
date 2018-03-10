@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import uniqueValidator from 'mongooose-unique-validator';
+import uniqueValidator from 'mongoose-unique-validator';
 
 // TODO: add uniqueness and email validation to email field
 
@@ -21,33 +21,33 @@ const schema = new mongoose.Schema(
   { timestamps: true }
 );
 
-schema.methods.isValidPassword = function isValidPassword(password) {
+schema.methods.isValidPassword = function isValidPassword(
+  password: string
+): boolean {
   return bcrypt.compareSync(password, this.passwordHash);
 };
 
-schema.methods.setPassword = function setPassword(password) {
+schema.methods.setPassword = function setPassword(password: string) {
   this.passwordHash = bcrypt.hashSync(password, 10);
 };
 
-schema.methods.setConfirmationToken = function setConfirmationToken(password) {
+schema.methods.setConfirmationToken = function setConfirmationToken(
+  password: string
+) {
   this.confirmationToken = this.generateJWT();
 };
 
-schema.methods.generateConfirmationUrl = function generateConfirmationUrl(
-  user
-) {
+schema.methods.generateConfirmationUrl = function generateConfirmationUrl(): string {
   return `${process.env.HOST}/confirmation/${this.confirmationToken}`;
 };
 
-schema.methods.generateResetPasswordLink = function generateResetPasswordLink(
-  user
-) {
+schema.methods.generateResetPasswordLink = function generateResetPasswordLink(): string {
   return `${process.env.HOST}/reset_password/${
     this.generateResetPasswordToken
   }`;
 };
 
-schema.methods.generateJWT = function generateJWT() {
+schema.methods.generateJWT = function generateJWT(): string {
   return jwt.sign(
     {
       email: this.email,
@@ -57,7 +57,7 @@ schema.methods.generateJWT = function generateJWT() {
   );
 };
 
-schema.methods.generateResetPasswordToken = function generateResetPasswordToken() {
+schema.methods.generateResetPasswordToken = function generateResetPasswordToken(): string {
   return jwt.sign(
     {
       _id: this._id
@@ -67,7 +67,11 @@ schema.methods.generateResetPasswordToken = function generateResetPasswordToken(
   );
 };
 
-schema.methods.toAuthJSON = function toAuthJSON() {
+schema.methods.toAuthJSON = function toAuthJSON(): {
+  email: string,
+  confirmed: boolean,
+  token: string
+} {
   return {
     email: this.email,
     confirmed: this.confirmed,

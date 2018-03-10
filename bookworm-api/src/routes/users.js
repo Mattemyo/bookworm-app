@@ -5,19 +5,26 @@ import { sendConfirmationEmail } from '../mailer';
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
-  const { email, password } = req.body.user;
-  const user = new User({ email });
-  user.setPassword(password);
-  user.setConfirmationToken();
-  user
-    .save()
-    .then((userRecord) => {
-      sendConfirmationEmail(userRecord(userRecord));
-      res.json({ user: userRecord.toAuthJSON() });
-    })
-    .catch((err) => res.status(400).json({ errors: parseErrors(err.errors) }));
-});
-
+router.post(
+  '/',
+  (
+    {
+      body: { user: { email, password } }
+    }: { email: string, password: string },
+    { status, json }: { status: {}, json: {} }
+  ) => {
+    const { setPassword, setConfirmationToken, save } = new User({ email });
+    setPassword(password);
+    setConfirmationToken();
+    save()
+      .then((userRecord: {}) => {
+        sendConfirmationEmail(userRecord(userRecord));
+        json({ user: userRecord.toAuthJSON() });
+      })
+      .catch((err: {}) => {
+        status(400).json({ errors: parseErrors(err.errors) });
+      });
+  }
+);
 
 export default router;

@@ -1,9 +1,9 @@
 import _ from 'lodash';
 
-export default function parseError() {
+export default function parseError(errors: {}): {} {
   const result = {};
-  _.forEach(errors, (val key) => {
-    resultkey[key] = val.message
-  })
+  _.forEach(errors, ({ message }: { message: string }, key: string) => {
+    resultkey[key] = message;
+  });
   return result;
 }
