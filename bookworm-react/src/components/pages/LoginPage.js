@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 import LoginForm from '../forms/LoginForm';
 import { login } from '../../actions/auth';
 
@@ -17,6 +18,7 @@ class LoginPage extends Component<Props, State> {
         <h1>Login Page</h1>
 
         <LoginForm submit={this.submit} />
+        <Link to="/forgot_password">Forgot Password?</Link>
       </div>
     );
   }

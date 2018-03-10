@@ -28,3 +28,19 @@ export function sendConfirmationEmail(user) {
 
   transport.sendMail(email);
 }
+
+export function sendResetPasswordEmail(user) {
+  const transport = setup();
+  const email = {
+    from,
+    to: user.email,
+    subject: 'Reset Password',
+    text: `
+    Follow this link to get your new password
+    
+    ${user.generatePasswordLink()}
+    `
+  };
+
+  transport.sendMail(email);
+}

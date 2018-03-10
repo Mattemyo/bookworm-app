@@ -11,6 +11,7 @@
     "node": true
   },
   "rules": {
+    "no-underscore-dangle": [ 1, {"allow": ["_id"] }],
     "no-undef": "off",
     "no-unused-vars": "off",
     "no-alert": [2],
