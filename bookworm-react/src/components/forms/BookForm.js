@@ -91,13 +91,17 @@ export default class BookForm extends Component {
     const {
       onSubmit,
       changeCover,
+      onChange,
+      onChangeNumber,
       state: { errors, data, loading, covers }
     } = this;
+
+    const { title, authors, pages, cover } = data;
 
     return (
       <Segment>
         <Form onSubmit={onSubmit} loading={loading}>
-          <Grid columns={2} fluid stackable>
+          <Grid columns={2} stackable>
             <Grid.Row>
               <Grid.Column>
                 <Form.Field error={Boolean(errors.title)}>
@@ -107,8 +111,8 @@ export default class BookForm extends Component {
                     name="title"
                     id="title"
                     placeholder="title"
-                    value={data.title}
-                    onChange={this.onChange}
+                    value={title}
+                    onChange={onChange}
                   />
                   {errors.title && <InlineError text={errors.title} />}
                 </Form.Field>
@@ -119,26 +123,27 @@ export default class BookForm extends Component {
                     name="authors"
                     id="authors"
                     placeholder="Authors"
-                    value={data.authors}
-                    onChange={this.onChange}
+                    value={authors}
+                    onChange={onChange}
                   />
                   {errors.authors && <InlineError text={errors.authors} />}
                 </Form.Field>
                 <Form.Field error={Boolean(errors.pages)}>
                   <label htmlFor="pages">Pages</label>
                   <input
-                    type="number"
+                    disabled={pages === undefined}
+                    type="text"
                     name="pages"
                     id="pages"
                     placeholder="pages"
-                    value={data.pages}
-                    onChange={this.onChangeNumber}
+                    value={pages !== undefined ? pages : 'Loading...'}
+                    onChange={onChangeNumber}
                   />
                   {errors.pages && <InlineError text={errors.pages} />}
                 </Form.Field>
               </Grid.Column>
               <Grid.Column>
-                <Image size="small" src="data.cover" />
+                <Image size="small" src={cover} />
                 {covers.length > 1 && (
                   <a role="button" tabIndex="0" onClick={changeCover}>
                     Another cover

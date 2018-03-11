@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { Segment } from 'semantic-ui-react';
+import axios from 'axios';
 import SearchBookForm from '../forms/SearchBookForm';
 import BookForm from '../forms/BookForm';
 
@@ -10,7 +11,13 @@ class NewBookPage extends Component {
   };
 
   onBookSelect = (book: {}) => {
-    this.setState(book);
+    this.setState({ book });
+    axios
+      .get(`/api/books/fetchPages?goodreadsId=${book.goodreadsId}`)
+      .then((res: {}): number => res.data.pages)
+      .then((pages: number) => {
+        this.setState({ book: { ...book, pages } });
+      });
   };
 
   addBook = () => {

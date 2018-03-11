@@ -24,15 +24,26 @@ export const logout = (credentials: {}): any => (dispatch: {}): any => {
   dispatch(userLoggedOut());
 };
 
-export const confirm = (token: string): {} => (dispatch: {}) =>
-  api.user.confirm(token).then((user) => {
+export const confirm = (token: string): {} => (dispatch: {}) => {
+  api.user.confirm(token).then((user: {}) => {
     localStorage.bookwormJWT = user.token;
     dispatch(userLoggedIn(user));
   });
+};
 
-export const resetPasswordRequest = ({ email }) => () =>
+export const resetPasswordRequest = ({
+  email
+}: {
+  email: string
+}): {} => () => {
   api.user.resetPasswordRequest(email);
+};
 
-export const validateToken = (token) => () => api.user.validateToken(token);
+export const validateToken = (token: string): {} => () => {
+  api.user.validateToken(token);
+};
 
-export const resetPassword = (data) => () => api.user.resetPassword(data);
+export const resetPassword = (data: {}): {} => () => {
+  api.user.resetPassword(data);
+};
+ 
