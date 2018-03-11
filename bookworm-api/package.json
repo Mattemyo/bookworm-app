@@ -32,6 +32,8 @@
     "lodash": "^4.17.5",
     "mongoose": "^5.0.9",
     "mongoose-unique-validator": "^2.0.0",
-    "nodemailer": "^4.6.2"
+    "nodemailer": "^4.6.2",
+    "request-promise": "^4.2.2",
+    "xml2js": "^0.4.19"
   }
 }

@@ -3,9 +3,7 @@ import User from '../models/User';
 import parseErrors from '../utils/parseErrors';
 import { sendConfirmationEmail } from '../mailer';
 
-const router = express.Router();
-
-const { post } = router;
+const { router: { post } } = express.Router();
 
 post(
   '/',

@@ -10,6 +10,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import rootReducer from './rootReducer';
+import setAuthorizationHeader from './utils/setAuthorizationHeader';
 import { userLoggedIn } from './actions/auth';
 
 const store = createStore(
@@ -24,6 +25,7 @@ if (localStorage.bookwormJWT) {
     email: payload.email,
     confirmed: payload.confirmed
   };
+  setAuthorizationHeader(user.token);
   store.dispatch(userLoggedIn(user));
 }
 
