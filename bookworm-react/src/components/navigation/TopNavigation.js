@@ -4,18 +4,26 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import gravatarUrl from 'gravatar-url';
 import * as actions from '../../actions/auth';
+import { allBooksSelector } from '../../reducers/books';
 
 const TopNavigation = ({
   user,
-  logout
+  logout,
+  hasBooks
 }: {
   user: {},
-  logout: {}
+  logout: {},
+  hasBooks: boolean
 }): Element<any> => (
   <Menu secondary pointing>
     <Menu.Item as={Link} to="/dashboard">
       Dashboard
     </Menu.Item>
+    {hasBooks && (
+      <Menu.Item as={Link} to="/books/new">
+        Add New Book
+      </Menu.Item>
+    )}
     <Menu.Menu position="right">
       <Dropdown trigger={<Image avatar src={gravatarUrl(user.email)} />}>
         <Dropdown.Menu>
@@ -26,12 +34,11 @@ const TopNavigation = ({
   </Menu>
 );
 
-function mapStateToProps(state: {}): {} {
+function mapStateToProps({ user }: { user: {} }): {} {
   return {
-    user: state.user
+    user,
+    hasBooks: allBooksSelector(state) > 0
   };
 }
 
-export default connect(mapStateToProps, { logout: actions.logout })(
-  TopNavigation
-);
+export default connect(mapStateToProps, { logout: actions.logout })(TopNavigation);

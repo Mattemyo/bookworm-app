@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { Segment } from 'semantic-ui-react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import SearchBookForm from '../forms/SearchBookForm';
 import BookForm from '../forms/BookForm';
+import { createBook } from '../../actions/books';
 
-class NewBookPage extends Component {
+class NewBookPage extends Component<{
+  createBook: {},
+  history: {}
+}> {
   state = {
     book: null
   };
@@ -20,8 +25,12 @@ class NewBookPage extends Component {
       });
   };
 
-  addBook = () => {
-    console.log('hi');
+  addBook = (book: {}) => {
+    const { props: { createBook, history: { push } } } = this;
+
+    createBook(book).then(() => {
+      push('/dashboard');
+    });
   };
 
   render(): Element<any> {
@@ -30,12 +39,10 @@ class NewBookPage extends Component {
         <h1>Add a new book to your collection</h1>
         <SearchBookForm onBookSelect={this.onBookSelect} />
 
-        {this.state.book && (
-          <BookForm submit={this.addBook} book={this.state.book} />
-        )}
+        {this.state.book && <BookForm submit={this.addBook} book={this.state.book} />}
       </Segment>
     );
   }
 }
 
-export default withRouter(NewBookPage);
+export default withRouter(connect(null, { createBook })(NewBookPage));

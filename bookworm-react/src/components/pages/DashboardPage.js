@@ -1,23 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import ConfirmEmailMessage from '../messages/ConfirmEmailMessage';
 import { allBooksSelector } from '../../reducers/books';
 import AddBookCtA from '../ctas/AddBookCtA';
+import { fetchBooks } from '../../actions/books';
 
-const DashboardPage = ({
-  isConfirmed,
-  books
-}: {
+class DashboardPage extends Component<{
   isConfirmed: boolean,
-  books: []
-}): Element<any> => (
-  <div>
-    {!isConfirmed && <ConfirmEmailMessage />}
+  books: [],
+  fetchBooks: {}
+}> {
+  state = {};
 
-    {books.length === 0 && <AddBookCtA />}
-  </div>
-);
+  componentDidMount = () => {
+    this.onInit(this.props);
+  };
+
+  onInit = ({ fetchBooks }: {}) => {};
+
+  render(): Element<any> {
+    const { props: { isConfirmed, books } } = this;
+
+    return (
+      <div>
+        {!isConfirmed && <ConfirmEmailMessage />}
+
+        {books.length === 0 ? <AddBookCtA /> : <p>You have books!</p>}
+      </div>
+    );
+  }
+}
 
 function mapStateToProps(state: {}): {} {
   return {
@@ -26,4 +39,4 @@ function mapStateToProps(state: {}): {} {
   };
 }
 
-export default withRouter(connect(mapStateToProps)(DashboardPage));
+export default withRouter(connect(mapStateToProps, { fetchBooks })(DashboardPage));
